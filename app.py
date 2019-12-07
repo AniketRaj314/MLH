@@ -126,7 +126,7 @@ def login():
 @app.route("/organiser")
 @login_required
 def organiser():
-    return app.send_static_file("organizer.html")
+    return app.send_static_file("organiser.html")
 
 
 @app.route("/submit", methods=["POST"])
