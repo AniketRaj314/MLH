@@ -129,6 +129,12 @@ def organiser():
     return app.send_static_file("organiser.html")
 
 
+@app.route("/user")
+@login_required
+def user():
+    return app.send_static_file("user.html")
+
+
 @app.route("/submit", methods=["POST"])
 def submit():
     """Take data from the form, generate, display, and email QR code to user."""
