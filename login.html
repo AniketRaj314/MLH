@@ -35,7 +35,7 @@
 </head>
 
 <body class="text-center">
-    <form class="form-signin" method="post">
+    <form class="form-signin" method="post" id = "form">
         <img class="mb-4" src="./login_files/cropped-logotransp23.png" alt="" height="40%" width="40%">
 
         <h1 class="h3 mb-3 font-weight-normal">Please sign in!</h1>
@@ -55,7 +55,7 @@
 
 </body>
 <script>
-    let video;
+    //let video;
     let classifier;
     let label = 'Scanning For Faces...'
 
@@ -101,8 +101,12 @@
         document.getElementById('facedetect').innerHTML = label;
 
         if(oldlabel != 'Scanning for Faces...') {
-            alert("Login Successful!");
-            video.stop();
+            alert("Working");
+            document.getElementsByName('username')[0].value = 'aniket-spidey';
+            document.getElementsByName('password')[0].value = 'tsg12345';
+            document.getElementById('form').submit();
+            //video.remove();
+            move();
         }
         else
             classifyVideo();
