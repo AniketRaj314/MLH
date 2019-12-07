@@ -191,9 +191,9 @@ You're <b>required</b> to present this on the day of the event.""".format(
     )
 
 
-@app.route("/registrations")
+@app.route("/registration")
 @login_required
-def registrations():
+def registration():
     return app.send_static_file("registration.html")
 
 
