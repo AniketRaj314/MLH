@@ -20,7 +20,7 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Attachment, Content, Mail
 from sqlalchemy import desc, exc
 
-app = Flask(__name__, static_folder=getcwd())
+app = Flask(__name__)
 db = SQLAlchemy(app)
 app.secret_key = "qwertyuiop"
 bcrypt = Bcrypt(app)
@@ -121,6 +121,7 @@ def login():
                 return f"Wrong password for {user}!"
             except KeyError:
                 return "Please enter all required details!", 400
+    return app.send_static_file("login.html")
 
 
 @app.route("/organiser")
