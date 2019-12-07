@@ -105,10 +105,10 @@ def userlogin(user):
 def login():
     if request.method == "POST":
         try:
-            label = request.form["label"]
-            user = db.session.query(User).filter_by(User.label == label).first()
+            user_label = request.form["label"]
+            user = db.session.query(User).filter_by(label=user_label).first()
             if user is None:
-                return f"User with label {label} is not in the database!"
+                return f"User with label {user_label} is not in the database!"
             return userlogin(user)
         except KeyError:
             try:
