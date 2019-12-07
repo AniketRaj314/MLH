@@ -94,9 +94,9 @@ def logout():
 
 def userlogin(user):
     login_user(user)
-    if user.type == "O":
+    if user.user_type == "O":
         page = "organiser"
-    elif user.type == "U":
+    elif user.user_type == "U":
         page = "user"
     return redirect(url_for(page))
 
