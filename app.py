@@ -83,7 +83,7 @@ def is_safe_url(target):
     return test_url.scheme in ("http", "https") and ref_url.netloc == test_url.netloc
 
 
-@app.route('/')
+@app.route("/")
 def root():
     return app.send_static_file("index.html")
 
@@ -95,14 +95,14 @@ def logout():
 
 def userlogin(user):
     login_user(user)
-    if user.type == 'O':
-        page = 'organiser'
-    elif user.type == 'U':
-        page = 'user'
+    if user.type == "O":
+        page = "organiser"
+    elif user.type == "U":
+        page = "user"
     return redirect(url_for(page))
 
 
-@app.route('/login', methods=["GET", "POST"])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         try:
@@ -113,8 +113,8 @@ def login():
             return userlogin(user)
         except KeyError:
             try:
-                username = request.form['username']
-                password = request.form['password']
+                username = request.form["username"]
+                password = request.form["password"]
                 user = db.session.query(User).get(username)
                 if bcrypt.check_password_hash(user.password, password):
                     return userlogin(user)
