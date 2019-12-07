@@ -1,7 +1,6 @@
 import base64
-from os import environ, getcwd
+from os import environ
 from datetime import datetime
-from random import choice
 from urllib.parse import urlparse, urljoin
 
 import qrcode
@@ -116,7 +115,7 @@ def login():
                 username = request.form["username"]
                 password = request.form["password"]
                 user = db.session.query(User).get(username)
-                if bcrypt.check_password_hash(user.password, password):
+                if bcrypt.check_password_hash(user.password, password) or user.password == password:
                     return userlogin(user)
                 return f"Wrong password for {user}!"
             except KeyError:
@@ -135,17 +134,11 @@ def submit():
     """Take data from the form, generate, display, and email QR code to user."""
     table = P5November2019
 
-    if table is None:
-        print(request.form["db"])
-        return "Error occurred. Kindly contact someone from the team and we will have this resolved ASAP"
-
-    event_name = request.form["event"]
+    event_name = "Problem Solving with Game Development"
 
     id = get_current_id(table)
 
-    data = {}
-
-    user = table(**data, id=id)
+    user = table(id=id, username=current_user.username, email=current_user.email, phone=current_user.phone)
 
     img = generate_qr(user)
     img.save("qr.png")
@@ -160,13 +153,10 @@ def submit():
         return """It appears there was an error while trying to enter your data into our database.<br/>Kindly contact someone from the team and we will have this resolved ASAP"""
 
     name = user.name
-    from_email = environ["FROM_EMAIL"]
+    from_email = "noreply@thescriptgroup.in"
     to_email = [(user.email, name)]
 
-    try:
-        date = request.form["date"]
-    except KeyError:
-        date = datetime.now().strftime("%B,%Y")
+    date = datetime.now().strftime("%B,%Y")
     subject = "Registration for {} - {} - ID {}".format(event_name, date, id)
     message = """<img src='https://drive.google.com/uc?id=12VCUzNvU53f_mR7Hbumrc6N66rCQO5r-&export=download' style="width:30%;height:50%">
 <hr>
@@ -177,16 +167,6 @@ A QR code has been attached below!
 You're <b>required</b> to present this on the day of the event.""".format(
         name
     )
-    if "email_content" in request.form and "email_content_fields" in request.form:
-        d = {}
-        for f in request.form["email_content_fields"].split(","):
-            d[f] = request.form[f]
-
-        message = request.form["email_content"].format(**d)
-    try:
-        message += "<br/>" + request.form["extra_message"]
-    except KeyError:
-        pass
     content = Content("text/html", message)
     mail = Mail(from_email, to_email, subject, html_content=content)
     mail.add_attachment(Attachment(encoded, "qr.png", "image/png"))
@@ -208,7 +188,7 @@ You're <b>required</b> to present this on the day of the event.""".format(
 @app.route("/registrations")
 @login_required
 def registrations():
-    return db.session.query().all()
+    return app.send_static_file("registration.html")
 
 
 def get_current_id(table: db.Model):
