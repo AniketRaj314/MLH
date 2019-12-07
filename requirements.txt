@@ -1,0 +1,8 @@
+black
+Flask
+Flask-BCrypt
+Flask-Login
+Flask-SQLAlchemy
+mysql-connector-python
+qrcode
+sendgrid
