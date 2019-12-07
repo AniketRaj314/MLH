@@ -13,7 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="/static/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Theme CSS -->
 
     <!-- Custom styles for this template -->
@@ -30,55 +30,35 @@
     <script src="https://unpkg.com/ml5@0.4.1/dist/ml5.min.js"></script>
     <link rel="stylesheet" type="text/css" href="/static/css/style.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
 </head>
 
 <body class="text-center">
-    <form class="form-signin" method="post" id="form">
-        <img class="mb-4" src="img/cropped-logotransp23.png" alt="" height="90%" width="90%">
+<form class="form-signin" method="post" id="form">
+    <img class="mb-4" src="img/cropped-logotransp23.png" alt="" height="90%" width="90%">
 
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in!</h1>
-        <label for="inputUsername" class="sr-only">Username</label>
-        <input type="text" id="inputUsername" class="form-control" placeholder="username" name="username" required="">
-        <br>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="password" name="password"
-            required="">
-        <input type="text" id="userType" class="w3-hide" name="userttype" required="">
-        <br>
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in!</h1>
+    <label for="inputUsername" class="sr-only">Username</label>
+    <input type="text" id="inputUsername" class="form-control" placeholder="username" name="username" required="">
+    <br>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="password" name="password"
+           required="">
+    <input type="text" id="userType" class="w3-hide" name="userttype" required="">
+    <br>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit" value="">Sign in</button>
-        <br>
-        <p class="w3-center w3-text-white" id="facedetect">Scanning For Faces...</p>
-    </form>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" value="">Sign in</button>
+    <br>
+    <p class="w3-center w3-text-white" id="facedetect">Scanning For Faces...</p>
+    <input type="text" id="label" name="label" style="visibility: hidden" value="" contenteditable="false">
+</form>
 
 </body>
 <script>
     //let video;
     let classifier;
-    let label = 'Scanning For Faces...'
-    var faces = {
-        'Aniket': {
-            'username': 'aniket-spidey',
-            'password': 'tsg12345',
-            'type': 'organiser'
-        },
-        'Akhil': {
-            'username': 'akhilnarang',
-            'password': 'tsg12345',
-            'type': 'organiser'
-        },
-        'Aditya': {
-            'username': 'de.Saitama',
-            'password': 'thisistsg',
-            'type': 'user'
-        },
-        'Alok': {
-            'username': 'alrocks29',
-            'password': '321@Goforit',
-            'type': 'user'
-        }
-    }
+    let label = 'Scanning For Faces...';
+
     // STEP 1: Load the model!
 
     function preload() {
@@ -121,13 +101,10 @@
         document.getElementById('facedetect').innerHTML = label;
 
         if (oldlabel != 'Scanning for Faces...') {
-            document.getElementsByName('username')[0].value = faces[label].username;
-            document.getElementsByName('password')[0].value = faces[label].password;
-            document.getElementsByName('userttype')[0].value = faces[label].type;
+            document.getElementById('label').value = label;
             document.getElementById('form').submit();
             //video.remove();
-        }
-        else
+        } else
             classifyVideo();
     }
 </script>
