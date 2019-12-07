@@ -1,4 +1,5 @@
 black
+gunicorn
 Flask
 Flask-BCrypt
 Flask-Login
