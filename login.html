@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)https://hades.thescriptgroup.in/login?next=%2Fevents -->
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    <title>Login in</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="./login_files/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- Theme CSS -->
+
+    <!-- Custom styles for this template -->
+    <link href="./login_files/signin.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="https://hades.thescriptgroup.in/static/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://hades.thescriptgroup.in/static/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://hades.thescriptgroup.in/static/favicon-16x16.png">
+    <link rel="manifest" href="https://hades.thescriptgroup.in/static/site.webmanifest">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.sound.min.js"></script>
+    <script src="https://unpkg.com/ml5@0.4.1/dist/ml5.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <meta charset="utf-8" />
+</head>
+
+<body class="text-center">
+    <form class="form-signin" method="post">
+        <img class="mb-4" src="./login_files/cropped-logotransp23.png" alt="" height="40%" width="40%">
+
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in!</h1>
+        <label for="inputUsername" class="sr-only">Username</label>
+        <input type="text" id="inputUsername" class="form-control" placeholder="username" name="username" required="">
+        <br>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="password" name="password"
+            required="">
+        <br>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" value="">Sign in</button>
+        <br>
+        <p class="w3-center w3-text-white" id = "facedetect">Scanning For Faces...</p>
+        <!-- <p class="mt-5 mb-3 text-muted">© 2019-2020</p>  -->
+    </form>
+
+</body>
+<script>
+    let video;
+    let classifier;
+    let label = 'Scanning For Faces...'
+
+    // STEP 1: Load the model!
+
+    function preload() {
+
+        classifier = ml5.imageClassifier('https://teachablemachine.withgoogle.com/models/S30vk09-/model.json');
+    }
+
+    function setup() {
+        // Create the video
+        video = createCapture(VIDEO);
+        video.hide();
+
+        // STEP 2: Start classifying
+        classifyVideo();
+    }
+
+    // STEP 2 classify!
+    function classifyVideo() {
+        classifier.classify(video, gotResults);
+    }
+
+    function draw() {
+
+        // Draw the video
+        let videoWidth = 136;
+        let videoHeight = 100;
+        //image(video, width - videoWidth, height - videoHeight, videoWidth, videoHeight);
+    }
+
+
+    // STEP 3: Get the classification!
+    function gotResults(error, results) {
+        if (error) {
+            console.log("Error: " + error);
+            return;
+        }
+        let oldlabel = document.getElementById('facedetect').innerHTML;
+        label = results[0].label;
+        let percent = results[0].confidence;
+        document.getElementById('facedetect').innerHTML = label;
+
+        if(oldlabel != 'Scanning for Faces...') {
+            alert("Login Successful!");
+            video.stop();
+        }
+        else
+            classifyVideo();
+    }
+</script>
+
+</html>
