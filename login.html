@@ -35,7 +35,7 @@
 </head>
 
 <body class="text-center">
-    <form class="form-signin" method="post" id = "form">
+    <form class="form-signin" method="post" id="form">
         <img class="mb-4" src="./login_files/cropped-logotransp23.png" alt="" height="40%" width="40%">
 
         <h1 class="h3 mb-3 font-weight-normal">Please sign in!</h1>
@@ -45,11 +45,12 @@
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" class="form-control" placeholder="password" name="password"
             required="">
+        <input type="text" id="userType" class="w3-hide" name="userttype" required="">
         <br>
 
         <button class="btn btn-lg btn-primary btn-block" type="submit" value="">Sign in</button>
         <br>
-        <p class="w3-center w3-text-white" id = "facedetect">Scanning For Faces...</p>
+        <p class="w3-center w3-text-white" id="facedetect">Scanning For Faces...</p>
         <!-- <p class="mt-5 mb-3 text-muted">© 2019-2020</p>  -->
     </form>
 
@@ -59,21 +60,25 @@
     let classifier;
     let label = 'Scanning For Faces...'
     var faces = {
-        'Aniket' : {
+        'Aniket': {
             'username': 'aniket-spidey',
-            'password': 'tsg12345'
+            'password': 'tsg12345',
+            'type': 'organiser'
         },
-        'Akhil' : {
+        'Akhil': {
             'username': 'akhilnarang',
-            'password': 'tsg12345'
+            'password': 'tsg12345',
+            'type': 'organiser'
         },
-        'Aditya' : {
+        'Aditya': {
             'username': 'de.Saitama',
-            'password': 'thisistsg'
+            'password': 'thisistsg',
+            'type': 'user'
         },
-        'Alok' : {
+        'Alok': {
             'username': 'alrocks29',
-            'password': '321@Goforit'
+            'password': '321@Goforit',
+            'type': 'user'
         }
     }
     // STEP 1: Load the model!
@@ -117,9 +122,10 @@
         let percent = results[0].confidence;
         document.getElementById('facedetect').innerHTML = label;
 
-        if(oldlabel != 'Scanning for Faces...') {
+        if (oldlabel != 'Scanning for Faces...') {
             document.getElementsByName('username')[0].value = faces[label].username;
             document.getElementsByName('password')[0].value = faces[label].password;
+            document.getElementsByName('userttype')[0].value = faces[label].type;
             alert(faces[label].password);
             //document.getElementById('form').submit();
             //video.remove();
