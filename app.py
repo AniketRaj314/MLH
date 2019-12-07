@@ -158,7 +158,7 @@ def submit():
         print(e)
         return """It appears there was an error while trying to enter your data into our database.<br/>Kindly contact someone from the team and we will have this resolved ASAP"""
 
-    name = user.name
+    name = current_user.username
     from_email = "noreply@thescriptgroup.in"
     to_email = [(user.email, name)]
 
