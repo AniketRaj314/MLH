@@ -58,7 +58,24 @@
     //let video;
     let classifier;
     let label = 'Scanning For Faces...'
-
+    var faces = {
+        'Aniket' : {
+            'username': 'aniket-spidey',
+            'password': 'tsg12345'
+        },
+        'Akhil' : {
+            'username': 'akhilnarang',
+            'password': 'tsg12345'
+        },
+        'Aditya' : {
+            'username': 'de.Saitama',
+            'password': 'thisistsg'
+        },
+        'Alok' : {
+            'username': 'alrocks29',
+            'password': '321@Goforit'
+        }
+    }
     // STEP 1: Load the model!
 
     function preload() {
@@ -101,10 +118,10 @@
         document.getElementById('facedetect').innerHTML = label;
 
         if(oldlabel != 'Scanning for Faces...') {
-            alert("Working");
-            document.getElementsByName('username')[0].value = 'aniket-spidey';
-            document.getElementsByName('password')[0].value = 'tsg12345';
-            document.getElementById('form').submit();
+            document.getElementsByName('username')[0].value = faces[label].username;
+            document.getElementsByName('password')[0].value = faces[label].password;
+            alert(faces[label].password);
+            //document.getElementById('form').submit();
             //video.remove();
             move();
         }
