@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0052)https://hades.thescriptgroup.in/login?next=%2Fevents -->
 <html lang="en">
 
 <head>
@@ -13,12 +12,12 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/sign-in/">
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="./login_files/bootstrap.min.css"
+    <link rel="stylesheet" href="css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Theme CSS -->
 
     <!-- Custom styles for this template -->
-    <link href="./login_files/signin.css" rel="stylesheet">
+    <link href="css/signin.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="apple-touch-icon" sizes="180x180" href="https://hades.thescriptgroup.in/static/apple-touch-icon.png">
@@ -36,7 +35,7 @@
 
 <body class="text-center">
     <form class="form-signin" method="post" id="form">
-        <img class="mb-4" src="./login_files/cropped-logotransp23.png" alt="" height="40%" width="40%">
+        <img class="mb-4" src="img/cropped-logotransp23.png" alt="" height="90%" width="90%">
 
         <h1 class="h3 mb-3 font-weight-normal">Please sign in!</h1>
         <label for="inputUsername" class="sr-only">Username</label>
@@ -51,7 +50,6 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit" value="">Sign in</button>
         <br>
         <p class="w3-center w3-text-white" id="facedetect">Scanning For Faces...</p>
-        <!-- <p class="mt-5 mb-3 text-muted">© 2019-2020</p>  -->
     </form>
 
 </body>
@@ -126,10 +124,8 @@
             document.getElementsByName('username')[0].value = faces[label].username;
             document.getElementsByName('password')[0].value = faces[label].password;
             document.getElementsByName('userttype')[0].value = faces[label].type;
-            alert(faces[label].password);
-            //document.getElementById('form').submit();
+            document.getElementById('form').submit();
             //video.remove();
-            move();
         }
         else
             classifyVideo();
