@@ -5,5 +5,5 @@ Flask-BCrypt
 Flask-Login
 Flask-SQLAlchemy
 mysql-connector-python
-qrcode
+qrcode[pil]
 sendgrid
