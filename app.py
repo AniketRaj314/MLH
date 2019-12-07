@@ -1,5 +1,5 @@
 import base64
-from os import environ
+from os import environ, getcwd
 from datetime import datetime
 from random import choice
 from urllib.parse import urlparse, urljoin
@@ -20,7 +20,7 @@ from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Attachment, Content, Mail
 from sqlalchemy import desc, exc
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder=getcwd())
 db = SQLAlchemy(app)
 app.secret_key = "qwertyuiop"
 bcrypt = Bcrypt(app)
