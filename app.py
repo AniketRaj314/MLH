@@ -85,7 +85,7 @@ def is_safe_url(target):
 
 @app.route('/')
 def root():
-    return redirect(url_for("login"))
+    return app.send_static_file("index.html")
 
 
 @app.route("/logout")
